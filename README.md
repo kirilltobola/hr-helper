@@ -7,8 +7,8 @@ CRM система для работы HR отдела.
 ### Участники:
 - [Кирилл](https://github.com/kirilltobola).
 - [Максим](https://github.com/zindmax).
-- [Евгений]().
-- [Михаил]().
+- Евгений.
+- [Михаил](https://github.com/kekuopex).
 
 ### Ссылки:
 - [Mind map](https://coggle.it/diagram/YU2458XUaSh-OK).
@@ -25,3 +25,15 @@ CRM система для работы HR отдела.
 - npm (v7+ :grey_question:)
 
 ### Запуск приложения:
+- cp .env.example .env
+- php artisan key:generate
+---
+- php artisan breeze:install
+- npm install
+- npm run dev
+- php artisan migrate
+
+**Не забыть:**
+- запустить mysql, создать бд, с таким же названием как в .env ```DB_DATABASE=some_name```
+
+***Если не запускается - пишите в чат.***
