@@ -1,7 +1,11 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use App\Models\Position;
+use App\Models\ProgrammingLevel;
+use App\Models\Candidate;
+use App\Models\Status;
+use \App\Models\Cv;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -12,10 +16,6 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
-Route::get('/', function () {
-    return view('welcome');
-});
 
 Route::get('/dashboard', function () {
     return view('dashboard');
