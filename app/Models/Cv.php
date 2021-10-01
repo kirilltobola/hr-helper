@@ -13,6 +13,16 @@ class Cv extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'skills',
+        'cv',
+        'experience',
+        'position',
+        'programming_level',
+        'date',
+        'status'
+    ];
+
     public function candidate()
     {
         return $this->hasOne(Candidate::class);
@@ -23,11 +33,11 @@ class Cv extends Model
     }
 
     public function getProgrammingLevelAttribute($id){
-        return ProgrammingLevel::find($id);
+        return ProgrammingLevel::findOrFail($id);
     }
 
     public function getStatusAttribute($id){
-        return Status::find($id);
+        return Status::findOrFail($id);
     }
 
     public function setPositionAttribute($value)
