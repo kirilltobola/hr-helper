@@ -31,7 +31,7 @@ class CvSeeder extends Seeder
                 'position' => 2,
                 'programming_level' => 2,
                 'date' => '2021.10.12',
-                'status' => 2
+                'status' => 1
             ],
             [
                 'skills' => 'some skills 3',
