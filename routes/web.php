@@ -9,8 +9,6 @@ Route::get('/dashboard', function () {
 require __DIR__.'/auth.php';
 
 
-
-
 Route::middleware(['auth'])->group(function () {
 
     Route::prefix('/cv')->group(function(){
@@ -28,5 +26,24 @@ Route::middleware(['auth'])->group(function () {
             Route::post('/delete',[\App\Http\Controllers\CvController::class,'delete'])->name('cv_delete');
         });
     });
-});
 
+    Route::group(['middleware' => 'admin', 'prefix' => 'admin'], function () {
+        Route::get('/', function () {
+            return view('admin_dashboard');
+        });
+
+        Route::prefix('/{model}')->group(function () {
+            Route::get('/', [App\Http\Controllers\AdminController::class, 'showModelList']);
+
+            Route::get('/add', [App\Http\Controllers\AdminController::class, 'showAdd']);
+            Route::post('/add', [App\Http\Controllers\AdminController::class, 'add']);
+
+            Route::prefix('/{id}')->group(function () {
+                Route::get('/edit', [App\Http\Controllers\AdminController::class, 'showEdit']);
+                Route::post('/edit', [App\Http\Controllers\AdminController::class, 'edit']);
+
+                Route::post('/delete', [App\Http\Controllers\AdminController::class, 'delete']);
+            });
+        });
+    });
+});
