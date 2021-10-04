@@ -8,7 +8,6 @@
                         <li class="nav-item">
                             <a class="nav-link active" aria-current="page" href={{route('dashboard')}}>Домой</a>
                         </li>
-                        {{--                    добавить рут--}}
                         <li class="nav-item">
                             <a class="nav-link" href='{{route('cv_add_get')}}'>Добавить резюме</a>
                         </li>

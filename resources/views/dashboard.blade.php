@@ -8,7 +8,6 @@
             <div class="me-4 border">
                 <h3 class="text-center">Фильтрация</h3>
                 <form action="{{route('dashboard')}}" method="get">
-                    @csrf
                     <fieldset>
                         <legend class="text-center">По позиции</legend>
                         <div class="d-flex flex-column ms-2">
@@ -20,16 +19,16 @@
                     <fieldset>
                         <legend class="text-center">По уровню</legend>
                         <div class="d-flex flex-column ms-2">
-                        @foreach($programming_levels as $level)
-                            <label><input type="checkbox" name="levels[]" value={{$level->id}}>{{$level->name}}</label>
-                        @endforeach
+                            @foreach($programming_levels as $level)
+                                <label><input type="checkbox" name="levels[]" value={{$level->id}}>{{$level->name}}</label>
+                            @endforeach
                         </div>
                     </fieldset>
                     <fieldset>
                         <legend class="text-center">По дате</legend>
                         <div class="d-flex flex-column justify-content-center ms-2">
-                            <label>От<input type="date" name="dateFrom"></label>
-                            <label>До<input type="date" name="dateTo"></label>
+                            <label>От: <input type="date" name="dateFrom"></label>
+                            <label>До: <input type="date" name="dateTo"></label>
                         </div>
                     </fieldset>
                     <fieldset>
