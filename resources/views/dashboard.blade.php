@@ -7,12 +7,14 @@
         <div class="d-flex flex-row">
             <div class="me-4 border">
                 <h3 class="text-center">Фильтрация</h3>
-                <form action="{{route('dashboard')}}" method="get">
+                <form class="form-group" action="{{route('dashboard')}}" method="get">
                     <fieldset>
                         <legend class="text-center">По позиции</legend>
                         <div class="d-flex flex-column ms-2">
                             @foreach($positions as $position)
-                                <label><input type="checkbox" name="positions[]" value={{$position->id}}>{{$position->name}}</label>
+                            <label>
+                                <input type="checkbox" name="position[]" value={{$position->id}}>{{$position->name}}
+                            </label>
                             @endforeach
                         </div>
                     </fieldset>
@@ -20,7 +22,9 @@
                         <legend class="text-center">По уровню</legend>
                         <div class="d-flex flex-column ms-2">
                             @foreach($programming_levels as $level)
-                                <label><input type="checkbox" name="levels[]" value={{$level->id}}>{{$level->name}}</label>
+                            <label>
+                                <input type="checkbox" name="programming_level[]" value={{$level->id}}>{{$level->name}}
+                            </label>
                             @endforeach
                         </div>
                     </fieldset>
@@ -35,7 +39,9 @@
                         <legend class="text-center">По решению</legend>
                         <div class="d-flex flex-column ms-2">
                             @foreach($statuses as $status)
-                                <label><input type="checkbox" name="statuses[]" value={{$status->id}}>{{$status->name}}</label>
+                            <label>
+                                <input type="checkbox" name="status[]" value={{$status->id}}>{{$status->name}}
+                            </label>
                             @endforeach
                         </div>
                     </fieldset>
@@ -102,6 +108,7 @@
                                     </form>
                                 </div>
                             </th>
+                            <th class="text-center" scope="col">Действия</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -127,6 +134,21 @@
                                     </select>
                                 </form>
                             </td>
+                            <td>
+                                <div class="btn-group d-flex" role="group">
+                                    <button id="btnGroupDrop1" type="button" class="btn btn-dark dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                                        Actions
+                                    </button>
+                                    <ul class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+                                        <li>
+                                            <a class="dropdown-item" href="{{route('cv', $cv->id)}}">View</a>
+                                        </li>
+                                        <li>
+                                            <a class="dropdown-item" href="{{route('cv_edit_get', $cv->id)}}">Edit</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </td>
                         </tr>
                     @endforeach
                     </tbody>
@@ -134,3 +156,4 @@
             </div>
         </div>
 @endsection
+
