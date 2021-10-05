@@ -39,22 +39,45 @@ Route::middleware(['auth'])->group(function () {
         });
     });
 
-    Route::group(['middleware' => 'admin', 'prefix' => 'admin'], function () {
-        Route::get('/', function () {
-            return view('admin_dashboard');
-        });
+    Route::group([
+        'middleware' => 'admin',
+        'prefix' => 'admin',
+        'as' => 'admin.'
+    ], function () {
+        Route::get(
+            '/',
+            [App\Http\Controllers\AdminController::class, 'index']
+        )->name('index');
 
         Route::prefix('/{model}')->group(function () {
-            Route::get('/', [App\Http\Controllers\AdminController::class, 'showModelList']);
+            Route::get(
+                '/',
+                [App\Http\Controllers\AdminController::class, 'show']
+            )->name('show');
 
-            Route::get('/add', [App\Http\Controllers\AdminController::class, 'showAdd']);
-            Route::post('/add', [App\Http\Controllers\AdminController::class, 'add']);
+            Route::get(
+                '/add',
+                [App\Http\Controllers\AdminController::class, 'create']
+            )->name('create');
+            Route::post(
+                '/add',
+                [App\Http\Controllers\AdminController::class, 'store']
+            )->name('store');
 
             Route::prefix('/{id}')->group(function () {
-                Route::get('/edit', [App\Http\Controllers\AdminController::class, 'showEdit']);
-                Route::post('/edit', [App\Http\Controllers\AdminController::class, 'edit']);
+                Route::get(
+                    '/edit',
+                    [App\Http\Controllers\AdminController::class, 'edit']
+                )->name('edit');
+                Route::put(
+                    '/edit',
+                    [App\Http\Controllers\AdminController::class, 'update']
+                )->name('update');
 
-                Route::post('/delete', [App\Http\Controllers\AdminController::class, 'delete']);
+                Route::delete(
+                    '/delete',
+                    [App\Http\Controllers\AdminController::class, 'destroy']
+                )->name('destroy');
             });
         });
     });
