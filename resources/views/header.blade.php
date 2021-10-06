@@ -12,10 +12,10 @@
                             <a class="nav-link" href='{{route('cv_add_get')}}'>Добавить резюме</a>
                         </li>
                     </ul>
-{{--                    <form class="d-flex" action="{{route('logout')}}" method='post'>--}}
-{{--                        @csrf--}}
-{{--                        <a class="btn btn-outline-light" href="{{route('logout')}}">Logout</a>--}}
-{{--                    </form>--}}
+                    <form class="d-flex" action="{{route('logout')}}" method='POST'>
+                        @csrf
+                        <button class="logoutLink btn btn-outline-light" type="submit">{{ __('Log Out') }}</button>
+                    </form>
                 </div>
             </div>
         </nav>
