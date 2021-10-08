@@ -6,7 +6,7 @@
                 <div class="me-auto">
                     <button class="btn btn-dark d-xl-none hide-form-btn" type="button">Фильтрация</button>
                 </div>
-                <a class="btn btn-dark" href="{{route('cv_add_get')}}">Добавить резюме</a>
+                <a class="btn btn-dark" href="{{route('cvs.create')}}">Добавить резюме</a>
             </div>
             <div class="d-flex flex-nowrap w-100">
                 <div class="me-4 border d-none d-xl-block bg-white" id="filterFrom">
@@ -143,8 +143,8 @@
                                     <td>
                                         <select class="form-select form-select-sm" name="forma" onchange="location = this.value;">
                                             <option selected disabled>Action</option>
-                                            <option value="{{route('cv', ['id' => $cv->id])}}">View</option>
-                                            <option value="{{route('cv_edit_get', ['id' =>$cv->id])}}">Edit</option>
+                                            <option value="{{route('cvs.show', ['cv' => $cv->id])}}">View</option>
+                                            <option value="{{route('cvs.create', ['cv' =>$cv->id])}}">Edit</option>
                                         </select>
                                     </td>
                                 </tr>

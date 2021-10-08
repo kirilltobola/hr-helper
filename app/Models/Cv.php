@@ -10,6 +10,7 @@ use App\Models\Position;
 use App\Models\ProgrammingLevel;
 use App\Models\Status;
 
+
 class Cv extends Model
 {
     use HasFactory;
