@@ -21,7 +21,7 @@ class CreateCvsTable extends Migration
             $table->smallInteger('position')->unsigned()->index()->nullable();
             $table->smallInteger('programming_level')->unsigned()->index()->nullable();
             $table->date('date')->nullable(false);
-            $table->smallInteger('status')->unsigned()->index()->nullable();
+            $table->smallInteger('status')->unsigned()->index()->nullable()->default(1);
             $table->timestamps();
 
             $table->foreign('position')

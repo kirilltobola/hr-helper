@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Candidate;
 use Illuminate\Support\Facades\Route;
 use App\Models\Cv;
 use App\Models\Status;

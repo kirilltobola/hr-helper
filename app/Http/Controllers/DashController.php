@@ -14,7 +14,7 @@ class DashController extends Controller
     {
         $filters = session('filters', []);
 
-        if($request->has('sort')){
+        if($request->has('sort')) {
             $cvs = Cv::query()->filter($filters)->sort($request->all())->get();
         }else{
             session()->forget('filters');
@@ -26,7 +26,6 @@ class DashController extends Controller
         $positions = Position::all();
         $programming_levels = ProgrammingLevel::all();
         $statuses = Status::all();
-
         $sortOrder = $request->input('order') == 'desc' ? 'asc' : 'desc';
 
         return view('/dashboard', ['cvs' => $cvs,

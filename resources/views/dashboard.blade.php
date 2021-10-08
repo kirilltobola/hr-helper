@@ -127,7 +127,7 @@
                                         <form action="{{route('status', ['id' => $cv->id])}}" method="post">
                                             @csrf
                                             <select class="form-select form-select-sm"
-                                                    aria-label=".form-select-sm example" name="cv_status "
+                                                    aria-label=".form-select-sm example" name="cv_status"
                                                     onchange="this.form.submit()">
                                                 @foreach($statuses as $status)
                                                     @if($status->name == $cv->status->name)
@@ -143,8 +143,8 @@
                                     <td>
                                         <select class="form-select form-select-sm" name="forma" onchange="location = this.value;">
                                             <option selected disabled>Action</option>
-                                            <option value="{{route('cv', $cv->id)}}">View</option>
-                                            <option value="{{route('cv_edit_get', $cv->id)}}">Edit</option>
+                                            <option value="{{route('cv', ['id' => $cv->id])}}">View</option>
+                                            <option value="{{route('cv_edit_get', ['id' =>$cv->id])}}">Edit</option>
                                         </select>
                                     </td>
                                 </tr>
