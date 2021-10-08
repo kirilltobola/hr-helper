@@ -1,15 +1,28 @@
 <?php
 
+use App\Models\Candidate;
 use Illuminate\Support\Facades\Route;
-
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth'])->name('dashboard');
+use App\Models\Cv;
+use App\Models\Status;
+use Illuminate\Http\Request;
 
 require __DIR__.'/auth.php';
 
+Route::get('/', function () {
+    return redirect('/dashboard');
+});
 
 Route::middleware(['auth'])->group(function () {
+    Route::prefix('/dashboard')->group(function () {
+        Route::get('/', [\App\Http\Controllers\DashController::class, 'show'])->name('dashboard');
+        Route::post('/status/{id}', function (Request $request) {
+            $cv = Cv::find($request->id);
+            $cv->status = Status::find($request->input('cv_status'));
+            $cv->save();
+
+            return redirect('/dashboard');
+        })->name('status');
+    });
 
     Route::prefix('/cv')->group(function(){
         Route::get('/add',function(){
