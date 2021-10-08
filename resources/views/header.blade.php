@@ -12,7 +12,7 @@
                             <a class="nav-link active" aria-current="page" href="{{route('dashboard')}}">Домой</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href='{{route('cv_add_get')}}'>Добавить резюме</a>
+                            <a class="nav-link" href='{{route('cvs.create')}}'>Добавить резюме</a>
                         </li>
                     </ul>
                     <form class="d-flex" action="{{route('logout')}}" method='POST'>
