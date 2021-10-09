@@ -14,6 +14,11 @@
                         <li class="nav-item">
                             <a class="nav-link" href='{{route('cvs.create')}}'>Добавить резюме</a>
                         </li>
+                        <li>
+                            @if(Auth::user()->is_admin)
+                                <a type="button" class="btn btn-outline-light" href="/admin">admin</a>
+                            @endif
+                        </li>
                     </ul>
                     <form class="d-flex" action="{{route('logout')}}" method='POST'>
                         @csrf

@@ -1,5 +1,8 @@
 @extends('layouts')
 
+@section('head')
+    @include('_head')
+@endsection
 @section('content')
         <div class="d-flex flex-wrap flex-row w-100">
             <div class="d-flex justify-content-end mb-3 w-100">
@@ -144,7 +147,7 @@
                                         <select class="form-select form-select-sm" name="forma" onchange="location = this.value;">
                                             <option selected disabled>Action</option>
                                             <option value="{{route('cvs.show', ['cv' => $cv->id])}}">View</option>
-                                            <option value="{{route('cvs.create', ['cv' =>$cv->id])}}">Edit</option>
+                                            <option value="{{route('cvs.edit', ['cv' => $cv->id])}}">Edit</option>
                                         </select>
                                     </td>
                                 </tr>
