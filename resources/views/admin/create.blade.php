@@ -1,4 +1,7 @@
 @extends('layouts')
+@section('head')
+    @include('_head')
+@endsection
 @section('content')
     <form action="{{ route('admin.store', ['model' => $modelAlias]) }}" method="post">
         @csrf
