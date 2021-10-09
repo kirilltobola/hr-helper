@@ -63,7 +63,7 @@ class AdminController extends Controller
     {
         $attributes = $this->getStoreAttributes($modelAlias);
         return view(
-            'admin.add',
+            'admin.create',
             [
                 'modelAlias' => $modelAlias,
                 'attributes' => $attributes

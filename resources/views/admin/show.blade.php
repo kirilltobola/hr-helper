@@ -4,8 +4,8 @@
     @include('_head')
 @endsection
 @section('content')
-    <a class="btn btn-dark" type="button" href="{{ route('admin.index') }}">Home</a>
-    <a class="btn btn-dark" href="{{ route('admin.create', ['model' => $modelAlias]) }}" type="button">Add {{ $modelAlias }}</a>
+    <a class="btn btn-dark" type="button" href="{{ route('admin.index') }}">На главную</a>
+    <a class="btn btn-dark" href="{{ route('admin.create', ['model' => $modelAlias]) }}" type="button">Добавить</a>
     <table class="table">
         <thead>
         <tr>
@@ -24,17 +24,17 @@
                 <td>
                     <div class="btn-group" role="group">
                         <button id="btnGroupDrop1" type="button" class="btn btn-dark dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                            Actions
+                            Действия
                         </button>
                         <ul class="dropdown-menu" aria-labelledby="btnGroupDrop1">
                             <li>
-                                <a href="{{ route('admin.edit', ['model' => $modelAlias, 'id' => $model->id]) }}" class="dropdown-item">edit</a>
+                                <a href="{{ route('admin.edit', ['model' => $modelAlias, 'id' => $model->id]) }}" class="dropdown-item">Редактировать</a>
                             </li>
                             <li>
                                 <form action="{{ route('admin.destroy', ['model' => $modelAlias, 'id' => $model->id]) }}" method="post">
                                     @csrf
                                     @method('delete')
-                                    <button type="submit" class="dropdown-item">delete</button>
+                                    <button type="submit" class="dropdown-item">Удалить</button>
                                 </form>
                             </li>
                         </ul>
