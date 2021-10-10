@@ -143,7 +143,11 @@
 
             let res = '';
             for(let i = 0; i < str.length; i++) {
-                res += alphabet[str[i]];
+                if (alphabet[str[i]]) {
+                    res += alphabet[str[i]];
+                } else {
+                    res += str[i];
+                }
             }
             return res;
         }

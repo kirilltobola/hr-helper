@@ -40,7 +40,7 @@ return [
             ],
         ]
     ],
-    'postition' => [
+    'position' => [
         'model' => App\Models\Position::class,
         'attributes' => [
             'show' => [
@@ -55,7 +55,7 @@ return [
             ],
         ]
     ],
-    'programming-level' => [
+    'programming_level' => [
         'model' => App\Models\ProgrammingLevel::class,
         'attributes' => [
             'show' => [

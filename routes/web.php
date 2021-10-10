@@ -44,6 +44,7 @@ Route::middleware(['auth'])->group(function () {
             Route::prefix('/{id}')->group(function () {
                 Route::get('/edit', [AdminController::class, 'edit'])->name('edit');
                 Route::put('/', [AdminController::class, 'update'])->name('update');
+                Route::get('/delete', [AdminController::class, 'delete'])->name('delete');
                 Route::delete('/delete', [AdminController::class, 'destroy'])->name('destroy');
             });
         });
