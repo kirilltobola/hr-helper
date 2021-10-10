@@ -4,30 +4,60 @@
     @include('cv._head')
 @endsection
 @section('content')
-    <h2>{{$cv->candidate->name}}</h2>
-    <p>email : {{$cv->candidate->email}}</p>
-    <p>Позиция: {{$cv->position->name}}</p>
-    <p>Уровень: {{$cv->programming_level->name}}</p>
-    <p>Дата собеседования: {{$cv->date}}</p>
-    <p>Статус: {{$cv->status->name}}</p>
-    <div>
-        <label>Ключевые навыки:</label>
-        <textarea>{{$cv->skills}}</textarea>
-    </div>
-    <div>
-        <label>Резюме:</label>
-        <textarea>{{$cv->cv}}</textarea>
-    </div>
-    <div>
-        <label>Опыт:</label>
-        <textarea>{{$cv->experience}}</textarea>
+    <div class="container mb-3" >
+        <h2>{{$cv->candidate->name}}</h2>
+
+        <table class="table table-hover text-nowrap">
+            <tr>
+                <th scope="row">Email:</th>
+                <td>{{$cv->candidate->email}}</td>
+            </tr>
+            <tr>
+                <th scope="row">Позиция:</th>
+                <td>{{$cv->position->name}}</td>
+            </tr>
+            <tr>
+                <th scope="row">Уровень:</th>
+                <td>{{$cv->programming_level->name}}</td>
+            </tr>
+            <tr>
+                <th scope="row">Дата собеседования:</th>
+                <td>{{$cv->date}}</td>
+            </tr>
+            <tr>
+                <th scope="row">Статус:</th>
+                <td>{{$cv->status->name}}</td>
+            </tr>
+        </table>
+        <div class="mb-4">
+            <ul class="list-group">
+                <li class="list-group-item list-group-item-dark">Ключевы навыки:</li>
+                <li class="list-group-item list-group-item-light">{!! $cv->skills !!}</li>
+            </ul>
+        </div>
+        <div class="mb-4">
+            <ul class="list-group">
+                <li class="list-group-item list-group-item-dark">Резюме:</li>
+                <li class="list-group-item list-group-item-light">{!! $cv->cv !!}</li>
+            </ul>
+        </div>
+        <div class="mb-4">
+            <ul class="list-group">
+                <li class="list-group-item list-group-item-dark">Опыт:</li>
+                <li class="list-group-item list-group-item-light">{!! $cv->experience !!}</li>
+            </ul>
+
+        </div>
+        <div class="d-flex flex-row">
+            <a class="btn btn-primary" href="{{route('cvs.save',['cv' => $cv->id])}}" role="button">Сохранить</a>
+            <div class="ms-auto ">
+                <form action="{{route('cvs.destroy',['cv' => $cv->id])}}" method="post">
+                    @csrf
+                    @method('delete')
+                    <button type="submit" class="btn btn-dark">Удалить cv</button>
+                </form>
+            </div>
+        </div>
     </div>
 
-    <a type="button" href="{{route('cvs.save',['cv' => $cv->id])}}">cохранить</a>
-    <form action="{{route('cvs.destroy',['cv' => $cv->id])}}" method="post">
-        @csrf
-        @method('delete')
-
-        <button type="submit" class="btn">удалить cv</button>
-    </form>
 @endsection
