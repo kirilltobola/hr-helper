@@ -22,12 +22,6 @@
             </div>
             <button type="submit" class="btn btn-success">Удалить с заменой</button>
         </form>
-
-        <form action="{{ route('admin.delete', ['model' => $model, 'id' => $id]) }}" method="post">
-            @csrf
-            @method('delete')
-            <button type="submit" class="btn btn-danger">Все равно удалить</button>
-        </form>
     @else
         <h3>Нет зависимостей, можно безопасно удалить</h3>
         <form action="{{ route('admin.delete', ['model' => $model, 'id' => $id]) }}" method="post">

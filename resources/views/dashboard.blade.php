@@ -135,8 +135,7 @@
                                                 @foreach($statuses as $status)
                                                     @if($status->name == $cv->status->name)
                                                         <option selected value={{$status->id}}>{{$status->name}}</option>
-                                                    @endif
-                                                    @if($status->name != $cv->status->name)
+                                                    @else()
                                                         <option value={{$status->id}}>{{$status->name}}</option>
                                                     @endif
                                                 @endforeach
