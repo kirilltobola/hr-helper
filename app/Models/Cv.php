@@ -30,16 +30,19 @@ class Cv extends Model
         return $this->hasOne(Candidate::class);
     }
 
-    public function getPositionAttribute($id){
-        return Position::findOrFail($id);
+    public function getPositionAttribute()
+    {
+        return Position::findOrFail($this->attributes['position']);
     }
 
-    public function getProgrammingLevelAttribute($id){
-        return ProgrammingLevel::findOrFail($id);
+    public function getProgrammingLevelAttribute()
+    {
+        return ProgrammingLevel::findOrFail($this->attributes['programming_level']);
     }
 
-    public function getStatusAttribute($id){
-        return Status::findOrFail($id);
+    public function getStatusAttribute()
+    {
+        return Status::findOrFail($this->attributes['status']);
     }
 
     public function setPositionAttribute($value)
@@ -57,7 +60,8 @@ class Cv extends Model
         $this->attributes['status'] = $value->id;
     }
 
-    public function scopeFilter(Builder $builder, $filters = []) {
+    public function scopeFilter(Builder $builder, $filters = []) :Builder
+    {
         if(!$filters){
             return $builder;
         }
@@ -81,8 +85,8 @@ class Cv extends Model
         return $builder;
     }
 
-    public function scopeSort(Builder $builder, $sort = []){
-
+    public function scopeSort(Builder $builder, $sort = []) :Builder
+    {
         $builder->when($sort['sort'] == 'name', function ($b) use ($sort){
             return $b->join('candidates', 'candidates.cv_id', '=', 'cvs.id')->orderBy('candidates.name', $sort['order']);
         });

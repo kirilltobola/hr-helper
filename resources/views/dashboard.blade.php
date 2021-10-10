@@ -164,9 +164,8 @@
                                         onchange="this.form.submit()">
                                     @foreach($statuses as $status)
                                         @if($status->name == $cv->status->name)
-                                            <option selected value={{$status->id}}>{{$status->name}}</option>
-                                        @endif
-                                        @if($status->name != $cv->status->name)
+                                            <option selected value={{$cv->status->id}}>{{$cv->status->name}}</option>
+                                        @else()
                                             <option value={{$status->id}}>{{$status->name}}</option>
                                         @endif
                                     @endforeach
@@ -174,11 +173,21 @@
                             </form>
                         </td>
                         <td>
-                            <select class="form-select form-select-sm" name="forma" onchange="location = this.value;">
-                                <option selected disabled></option>
-                                <option value="{{route('cvs.show', ['cv' => $cv->id])}}">View</option>
-                                <option value="{{route('cvs.edit', ['cv' => $cv->id])}}">Edit</option>
-                            </select>
+                            <div class="d-flex justify-content-center">
+                                <div class="btn-group" role="group">
+                                    <button id="btnGroupDrop1" type="button" class="btn btn-sm btn-light dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                                        Actions
+                                    </button>
+                                    <ul class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+                                        <li>
+                                            <a href="{{route('cvs.show', ['cv' => $cv->id])}}" class="dropdown-item">View</a>
+                                        </li>
+                                        <li>
+                                            <a href="{{route('cvs.edit', ['cv' => $cv->id])}}" class="dropdown-item">Edit</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
                         </td>
                     </tr>
                 @endforeach
