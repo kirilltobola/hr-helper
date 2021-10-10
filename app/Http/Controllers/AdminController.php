@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Cv;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 
@@ -40,7 +41,7 @@ class AdminController extends Controller
     {
         $models = config("registered_models");
         return view(
-            'admin.dashboard',
+             'admin.dashboard',
             ["models" => array_keys($models)]
         );
     }
@@ -108,10 +109,40 @@ class AdminController extends Controller
         return redirect()->route('admin.show', ['model' => $modelAlias]);
     }
 
-    public function destroy(string $modelAlias, int $id): RedirectResponse
+    public function delete(string $modelAlias, int $id)
     {
+        $model = $this->getModel($modelAlias);
+        $amount = Cv::where($modelAlias, '=', $id)->get()->count();
+
+        return view(
+            'admin.delete',
+            [
+                'model' => $modelAlias,
+                'change' => $model::all()->except([$id]),
+                'id' => $id,
+                'amount' => $amount
+            ]
+        );
+    }
+
+    public function destroy(Request $request, string $modelAlias, int $id): RedirectResponse
+    {
+        if ($request->input('change')) {
+            $this->change($modelAlias, $id, $request->input('change'));
+        }
+
         $model = $this->getModel($modelAlias);
         $model::find($id)->delete();
         return redirect()->route('admin.show', ['model' => $modelAlias]);
+    }
+
+    private function change($modelAlias, $id, $newId)
+    {
+        $newModel = $this->getModel($modelAlias)::find($newId);
+        $cvs = Cv::where($modelAlias, '=', $id)->get();
+        foreach ($cvs as $cv) {
+            $cv->$modelAlias = $newModel;
+            $cv->save();
+        }
     }
 }

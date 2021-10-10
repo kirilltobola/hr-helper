@@ -31,11 +31,7 @@
                                 <a href="{{ route('admin.edit', ['model' => $modelAlias, 'id' => $model->id]) }}" class="dropdown-item">Редактировать</a>
                             </li>
                             <li>
-                                <form action="{{ route('admin.destroy', ['model' => $modelAlias, 'id' => $model->id]) }}" method="post">
-                                    @csrf
-                                    @method('delete')
-                                    <button type="submit" class="dropdown-item">Удалить</button>
-                                </form>
+                                <a href="{{ route('admin.delete', ['model' => $modelAlias, 'id' => $model->id]) }}" class="dropdown-item">Удалить</a>
                             </li>
                         </ul>
                     </div>
