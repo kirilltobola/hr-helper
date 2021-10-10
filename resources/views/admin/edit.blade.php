@@ -16,6 +16,6 @@
                 <div class="alert alert-danger">{{ $message }}</div>
             @enderror
         @endforeach
-        <button class="btn btn-dark" type="submit">Edit</button>
+        <button class="btn btn-dark" type="submit">Редактировать</button>
     </form>
 @endsection

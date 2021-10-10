@@ -7,6 +7,7 @@ use App\Models\Cv;
 use App\Models\Position;
 use App\Models\ProgrammingLevel;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\App;
 
 class CvController extends Controller
 {
@@ -94,8 +95,8 @@ class CvController extends Controller
 
     public function save(Request $request, Cv $cv)
     {
-        $pdf = \Illuminate\Support\Facades\App::make('snappy.pdf.wrapper');
-        $pdf->loadHTML('<h1>HELLO WORLD</h1>');
+        $pdf = App::make('snappy.pdf.wrapper');
+        $pdf->loadHTML(view('cv.pdf', ['cv' => $cv]))->setPaper('a4');
         return $pdf->inline();
     }
 }
