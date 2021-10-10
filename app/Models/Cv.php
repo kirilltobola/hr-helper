@@ -5,10 +5,6 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use App\Models\Candidate;
-use App\Models\Position;
-use App\Models\ProgrammingLevel;
-use App\Models\Status;
 
 
 class Cv extends Model

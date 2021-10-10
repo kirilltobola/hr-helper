@@ -11,13 +11,19 @@
 
         <div class="input-group mb-3">
             <span class="input-group-text" id="span-name">Имя</span>
-            <input required type="text" class="form-control form-control-sm w-25" id="name-id" name="name" placeholder="Введите имя">
+            <input value="{{old('name')}}" type="text" class="form-control form-control-sm w-25" id="name-id" name="name" placeholder="Введите имя">
         </div>
+        @error('name')
+            <div class="alert alert-danger">{{ $message }}</div>
+        @enderror
 
         <div class="input-group mb-3">
             <span class="input-group-text" id="span-name">e-mail</span>
-            <input  required type="text" class="form-control form-control-sm w-25" id="email-id" name="email">
+            <input value="{{old('email')}}" type="text" class="form-control form-control-sm w-25" id="email-id" name="email">
         </div>
+        @error('email')
+            <div class="alert alert-danger">{{ $message }}</div>
+        @enderror
 
         <div class="input-group mb-3">
             <span class="input-group-text" id="span-name">Позиция</span>
@@ -39,25 +45,39 @@
 
         <div class="input-group mb-3">
             <span class="input-group-text" id="span-name">Дата</span>
-            <input required type="date" class="form-control form-control-sm w-25" id="date" name="date">
+            <input value="{{old('date')}}" type="date" class="form-control form-control-sm w-25" id="date" name="date">
         </div>
+        @error('date')
+            <div class="alert alert-danger">{{ $message }}</div>
+        @enderror
 
         <div class="form-group">
             <label for="skills" class="form-label">Ключевые навыки</label>
-            <div class="mb-3" id="skills"></div>
-            <textarea  id="input-skills" name="skills" required style="display: none"></textarea>
+            <div class="mb-3" id="skills">{!! old('skills') !!}</div>
+            <textarea id="input-skills" name="skills" style="display: none">{!! old('skills') !!}</textarea>
         </div>
+        @error('skills')
+            <div class="alert alert-danger">{{ $message }}</div>
+        @enderror
+
         <div class="form-group">
             <label for="cv" class="form-label">Резюме</label>
-            <div class="mb-3" id="cv"></div>
-            <textarea  id="input-cv" name="cv" required style="display: none"></textarea>
+            <div class="mb-3" id="cv">{!! old('cv') !!}</div>
+            <textarea id="input-cv" name="cv" style="display: none">{!! old('cv') !!}</textarea>
         </div>
+        @error('cv')
+            <div class="alert alert-danger">{{ $message }}</div>
+        @enderror
 
         <div class="form-group">
             <label for="experience" class="form-label">Опыт</label>
-            <div class="mb-3" id="experience"></div>
-            <textarea  id="input-experience" name="experience" required style="display: none"></textarea>
+            <div class="mb-3" id="experience">{!! old('experience') !!}</div>
+            <textarea id="input-experience" name="experience" style="display: none">{!! old('experience') !!}</textarea>
         </div>
+        @error('experience')
+            <div class="alert alert-danger">{{ $message }}</div>
+        @enderror
+
         <button class="btn btn-dark" type="submit">Добавить</button>
     </form>
 
