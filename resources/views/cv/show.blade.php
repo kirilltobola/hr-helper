@@ -3,6 +3,7 @@
 @section('head')
     @include('cv._head')
 @endsection
+
 @section('content')
     <div class="container mb-3" >
         <h2>{{$cv->candidate->name}}</h2>
@@ -59,5 +60,4 @@
             </div>
         </div>
     </div>
-
 @endsection

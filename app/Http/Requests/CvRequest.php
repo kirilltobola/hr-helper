@@ -11,7 +11,7 @@ class CvRequest extends FormRequest
     {
         return [
             'name' => 'required|max:256',
-            'email' => 'required|unique:candidates|email:rfc,dns|max:256',
+            'email' => 'required|email:rfc,dns|max:256|unique:candidates,email,'.$this->route()->originalParameter('cv'),
             'position' => 'required',
             'programming_level' => 'required',
             'date' => 'required',
