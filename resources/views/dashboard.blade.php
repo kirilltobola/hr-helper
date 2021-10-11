@@ -12,7 +12,7 @@
         <a class="btn btn-dark" href="{{route('cvs.create')}}">Добавить резюме</a>
     </div>
     <div class="d-flex flex-nowrap w-100">
-        <div class="me-4 border d-none d-xl-block bg-white" id="filterFrom">
+        <div class="me-4 border d-none d-xl-block bg-white" id="filterFrom" style="z-index:1">
             <h3 class="text-center">Фильтрация</h3>
             <form action="{{route('dashboard')}}" method="get">
                 <fieldset>
@@ -175,7 +175,9 @@
                         <td>
                             <div class="d-flex justify-content-center">
                                 <div class="btn-group" role="group">
-                                    <button id="btnGroupDrop1" type="button" class="btn btn-sm btn-light dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <button id="btnGroupDrop1" type="button"
+                                            class="btn btn-sm btn-light dropdown-toggle" data-bs-toggle="dropdown"
+                                            aria-expanded="false">
                                         Actions
                                     </button>
                                     <ul class="dropdown-menu" aria-labelledby="btnGroupDrop1">
