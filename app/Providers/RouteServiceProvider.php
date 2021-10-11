@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Models\Cv;
+use App\Models\User;
 use Illuminate\Cache\RateLimiting\Limit;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 use Illuminate\Http\Request;
@@ -36,6 +37,7 @@ class RouteServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        Route::model('user', User::class);
         Route::model('cv', Cv::class);
         $this->configureRateLimiting();
 

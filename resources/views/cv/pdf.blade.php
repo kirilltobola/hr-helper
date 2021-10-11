@@ -5,7 +5,8 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>{{$cv->candidate->name}}</title>
+
     <style>
         body {
             font-family: Arial;
@@ -18,6 +19,8 @@
             font-size: 20pt;
         }
         h2 {
+            font-weight: normal;
+            font-size: 12pt;
             text-decoration: underline;
         }
     </style>
@@ -26,9 +29,9 @@
     <div>
         <h1>{{$cv->candidate->name}}</h1>
 
-        <p>email: <a href="#">{{$cv->candidate->email}}</a></p>
+        <p>email: <a href="{{$cv->candidate->email}}">{{$cv->candidate->email}}</a></p>
         <p>позиция: {{$cv->position->name}}</p>
-        <p>уровень:{{$cv->programming_level->name}}</p>
+        <p>уровень: {{$cv->programming_level->name}}</p>
         <p>дата: {{$cv->date}}</p>
         <p>статус: {{$cv->status->name}}</p>
 
