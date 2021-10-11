@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\AdminUsersController;
 use App\Http\Controllers\CvController;
 use App\Http\Controllers\DashController;
 use Illuminate\Support\Facades\Route;
@@ -34,8 +35,9 @@ Route::middleware(['auth'])->group(function () {
         'prefix' => 'admin',
         'as' => 'admin.'
     ], function () {
-        Route::get('/', [AdminController::class, 'index'])->name('index');
+        Route::resource('users', AdminUsersController::class);
 
+        Route::get('/', [AdminController::class, 'index'])->name('index');
         Route::prefix('/{model}')->group(function () {
             Route::get('/', [AdminController::class, 'show'])->name('show');
             Route::post('/', [AdminController::class, 'store'])->name('store');
