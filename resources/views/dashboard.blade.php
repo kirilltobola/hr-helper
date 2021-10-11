@@ -119,7 +119,7 @@
                         </th>
                         <th class="text-center" scope="col">
                             <div class="d-flex flex-row justify-content-center align-items-center">
-                                <p class="mb-0">Дата<p>
+                                <p class="mb-0">Дата собеседования<p>
                                 <form action="{{route('dashboard')}}" method="get">
                                     <input type="hidden" name="sort" value="date">
                                     <input type="hidden" name="order" value="{{isset($sort) ? $sort : 'asc'}}">
