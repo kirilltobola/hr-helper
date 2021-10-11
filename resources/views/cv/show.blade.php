@@ -18,7 +18,7 @@
             </tr>
             <tr>
                 <th scope="row">Уровень:</th>
-                <td>{{$cv->programming_level->name}}</td>
+                <td>{{$cv->level->name}}</td>
             </tr>
             <tr>
                 <th scope="row">Дата собеседования:</th>

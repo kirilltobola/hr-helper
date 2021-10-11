@@ -13,22 +13,25 @@ class DashController extends Controller
     public function show(Request $request)
     {
         $filters = session('filters', []);
+        $cvs = Cv::query()->with(['status', 'position', 'level', 'candidate']);
 
         if ($request->has('sort')) {
-            $cvs = Cv::query()->filter($filters)->sort($request->all())->get();
+            $cvs = $cvs->filter($filters)->sort($request->all());
         }else{
             session()->forget('filters');
             $filters = $request->all();
             session()->put('filters', $filters);
-            $cvs = Cv::query()->filter($filters)->get();
+            $cvs = $cvs->filter($filters);
         }
 
+        $cvs = $cvs->get();
         $sortOrder = $request->input('order') == 'desc' ? 'asc' : 'desc';
 
-        return view('/dashboard', ['cvs' => $cvs,
-            'positions' => Position::all(),
-            'programming_levels' => ProgrammingLevel::all(),
-            'statuses' => Status::all(),
+        return view('/dashboard', [
+            'cvs' => $cvs,
+            'positions' => Position::pluck('name', 'id'),
+            'programming_levels' => ProgrammingLevel::pluck('name', 'id'),
+            'statuses' => Status::pluck('name', 'id'),
             'sort' => $sortOrder]);
     }
 }
