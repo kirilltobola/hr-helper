@@ -12,16 +12,16 @@
         <a class="btn btn-dark" href="{{route('cvs.create')}}">Добавить резюме</a>
     </div>
     <div class="d-flex flex-nowrap w-100">
-        <div class="me-4 border d-none d-xl-block bg-white" id="filterFrom">
+        <div class="me-4 border d-none d-xl-block bg-white" id="filterFrom" style="z-index:1">
             <h3 class="text-center">Фильтрация</h3>
             <form action="{{route('dashboard')}}" method="get">
                 <fieldset>
                     <legend class="text-center">По позиции</legend>
                     <div class="d-flex form-check flex-column ms-2">
-                        @foreach($positions as $position)
+                        @foreach($positions as $key => $position)
                         <label class="form-check-label">
-                            <input class="form-check-input" type="checkbox" name="position[]"
-                                   value={{$position->id}}>{{$position->name}}
+                            <input class="form-check-input" type="checkbox" name="position_id[]"
+                                   value={{$key}}>{{$position}}
                         </label>
                         @endforeach
                     </div>
@@ -29,10 +29,10 @@
                 <fieldset>
                     <legend class="text-center">По уровню</legend>
                     <div class="d-flex form-check flex-column ms-2">
-                        @foreach($programming_levels as $level)
+                        @foreach($programming_levels as $key => $level)
                         <label class="form-check-label">
-                            <input class="form-check-input" type="checkbox" name="programming_level[]"
-                                   value={{$level->id}}>{{$level->name}}
+                            <input class="form-check-input" type="checkbox" name="programming_level_id[]"
+                                   value={{$key}}>{{$level}}
                         </label>
                         @endforeach
                     </div>
@@ -53,10 +53,10 @@
                 <fieldset>
                     <legend class="text-center">По решению</legend>
                     <div class="d-flex form-check flex-column ms-2">
-                        @foreach($statuses as $status)
+                        @foreach($statuses as $key => $status)
                         <label class="form-check-label">
-                            <input class="form-check-input" type="checkbox" name="status[]"
-                                   value={{$status->id}}>{{$status->name}}
+                            <input class="form-check-input" type="checkbox" name="status_id[]"
+                                   value={{$key}}>{{$status}}
                         </label>
                         @endforeach
                     </div>
@@ -93,7 +93,7 @@
                             <div class="d-flex flex-row justify-content-center align-items-center">
                                 <p class="mb-0">Позиция</p>
                                 <form action="{{route('dashboard')}}" method="get">
-                                    <input type="hidden" name="sort" value="position">
+                                    <input type="hidden" name="sort" value="position_id">
                                     <input type="hidden" name="order" value="{{isset($sort) ? $sort : 'asc'}}">
                                     <button class="btn btn-sm" type="submit">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-down" viewBox="0 0 16 16">
@@ -107,7 +107,7 @@
                             <div class="d-flex flex-row justify-content-center align-items-center">
                                 <p class="mb-0">Уровень<p>
                                 <form action="{{route('dashboard')}}" method="get">
-                                    <input type="hidden" name="sort" value="programming_level">
+                                    <input type="hidden" name="sort" value="programming_level_id">
                                     <input type="hidden" name="order" value="{{isset($sort) ? $sort : 'asc'}}">
                                     <button class="btn btn-sm" type="submit">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-down" viewBox="0 0 16 16">
@@ -135,7 +135,7 @@
                             <div class="d-flex flex-row justify-content-center align-items-center">
                                 <p class="mb-0">Решение<p>
                                 <form action="{{route('dashboard')}}" method="get">
-                                    <input type="hidden" name="sort" value="status">
+                                    <input type="hidden" name="sort" value="status_id">
                                     <input type="hidden" name="order" value="{{isset($sort) ? $sort : 'asc'}}">
                                     <button class="btn btn-sm" type="submit">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-down" viewBox="0 0 16 16">
@@ -154,7 +154,7 @@
                         <th scope="row" class="text-center">{{$cv->candidate->name}}</th>
                         <td class="text-center">{{$cv->candidate->email}}</td>
                         <td class="text-center">{{$cv->position->name}}</td>
-                        <td class="text-center">{{$cv->programming_level->name}}</td>
+                        <td class="text-center">{{$cv->level->name}}</td>
                         <td class="text-center">{{$cv->date}}</td>
                         <td class="text-center">
                             <form action="{{route('status', ['id' => $cv->id])}}" method="post">
@@ -162,11 +162,11 @@
                                 <select class="form-select form-select-sm"
                                         aria-label=".form-select-sm example" name="cv_status"
                                         onchange="this.form.submit()">
-                                    @foreach($statuses as $status)
-                                        @if($status->name == $cv->status->name)
+                                    @foreach($statuses as $key => $status)
+                                        @if($status == $cv->status->name)
                                             <option selected value={{$cv->status->id}}>{{$cv->status->name}}</option>
                                         @else()
-                                            <option value={{$status->id}}>{{$status->name}}</option>
+                                            <option value={{$key}}>{{$status}}</option>
                                         @endif
                                     @endforeach
                                 </select>
@@ -175,7 +175,9 @@
                         <td>
                             <div class="d-flex justify-content-center">
                                 <div class="btn-group" role="group">
-                                    <button id="btnGroupDrop1" type="button" class="btn btn-sm btn-light dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <button id="btnGroupDrop1" type="button"
+                                            class="btn btn-sm btn-light dropdown-toggle" data-bs-toggle="dropdown"
+                                            aria-expanded="false">
                                         Actions
                                     </button>
                                     <ul class="dropdown-menu" aria-labelledby="btnGroupDrop1">
@@ -196,35 +198,6 @@
         </div>
     </div>
 </div>
-    <script>
-        let btn = document.querySelector('.hide-form-btn');
-        let div = document.querySelector('#filterFrom');
-        btn.onclick = function (){
-            div.classList.toggle('position-absolute');
-            div.classList.toggle('w-100');
-            div.classList.toggle('h-auto');
-            div.classList.toggle('d-none');
-            div.classList.toggle('top-10');
-            div.classList.toggle('start-0');
-        }
-    </script>
-    <script>
-        let filterForm = $('#filterFrom');
-        $(window).resize(function (){
-            if($(window).width() >= 1200) {
-                filterForm.removeClass('position-absolute');
-                filterForm.removeClass('w-100');
-                filterForm.removeClass('h-auto');
-            }else{
-                filterForm.addClass('d-none');
-            }
-            if(filterForm.hasClass('d-none')){
-                filterForm.removeClass('position-absolute');
-                filterForm.removeClass('w-100');
-                filterForm.removeClass('h-auto');
-                filterForm.removeClass('top-10');
-                filterForm.removeClass('start-0');
-            }
-        })
-    </script>
+<script src="{{asset('js/hideFilterFrom.js')}}"></script>
+<script src="{{asset('js/toggleFilterForm.js')}}"></script>
 @endsection

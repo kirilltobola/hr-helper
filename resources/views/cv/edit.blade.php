@@ -29,9 +29,12 @@
         <div class="input-group mb-3">
             <span class="input-group-text" id="span-name">Позиция</span>
             <select class="form-select form-select-sm" aria-label=".form-select-sm example" id="position" name="position">
-                <option selected value="{{$cv->position->id}}">{{$cv->position->name}}</option>
-                @foreach ($positions as $position)
-                    <option value="{{ $position->id }}">{{$position->name}}</option>
+                @foreach ($positions as $key => $position)
+                    @if($position == $cv->position->name)
+                        <option selected value={{$cv->position->id}}>{{$cv->position->name}}</option>
+                    @else()
+                        <option value={{$key}}>{{$position}}</option>
+                    @endif
                 @endforeach
             </select>
         </div>
@@ -41,9 +44,13 @@
 
         <div class="input-group mb-3">
             <span class="input-group-text" id="span-name">Уровень</span>
-            <select class="form-select form-select-sm" aria-label=".form-select-sm example" id="programming_level" name="programming_level" value="{{$cv->programming_level}}">
-                @foreach ($levels as $level)
-                    <option value="{{ $level->id }}">{{$level->name}}</option>
+            <select class="form-select form-select-sm" aria-label=".form-select-sm example" id="programming_level" name="programming_level">
+                @foreach ($levels as $key => $level)
+                    @if($level == $cv->level->name)
+                        <option selected value={{$cv->level->id}}>{{$cv->level->name}}</option>
+                    @else()
+                        <option value={{$key}}>{{$level}}</option>
+                    @endif
                 @endforeach
             </select>
         </div>
@@ -60,7 +67,7 @@
         @enderror
 
         <div class="form-group">
-            <label for="skills" class="form-label">Ключевые навыки</label>
+            <label for="input-skills" class="form-label">Ключевые навыки</label>
             <div class="mb-3" id="skills">{!! $cv->skills !!}</div>
             <textarea id="input-skills" name="skills" style="display: none">{{ $cv->skills }}</textarea>
         </div>
@@ -69,7 +76,7 @@
         @enderror
 
         <div class="form-group">
-            <label for="cv" class="form-label">Резюме</label>
+            <label for="input-cv" class="form-label">Резюме</label>
             <div class="mb-3" id="cv">{!! $cv->cv !!}</div>
             <textarea id="input-cv" name="cv" style="display: none">{{ $cv->cv }}</textarea>
         </div>
@@ -78,7 +85,7 @@
         @enderror
 
         <div class="form-group">
-            <label for="experience" class="form-label">Опыт</label>
+            <label for="input-experience" class="form-label">Опыт</label>
             <div class="mb-3" id="experience">{!! $cv->experience !!}</div>
             <textarea id="input-experience" name="experience" style="display: none">{{ $cv->experience }}</textarea>
         </div>

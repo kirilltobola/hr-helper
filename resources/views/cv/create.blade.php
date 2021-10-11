@@ -28,8 +28,8 @@
         <div class="input-group mb-3">
             <span class="input-group-text" id="span-name">Позиция</span>
             <select class="form-select form-select-sm" aria-label=".form-select-sm example" id="position" name="position">
-                @foreach ($positions as $position)
-                    <option value="{{ $position->id }}">{{$position->name}}</option>
+                @foreach ($positions as $key => $position)
+                    <option value="{{$key}}">{{$position}}</option>
                 @endforeach
             </select>
         </div>
@@ -37,8 +37,8 @@
         <div class="input-group mb-3">
             <span class="input-group-text" id="span-name">Уровень</span>
             <select class="form-select form-select-sm" aria-label=".form-select-sm example" id="programming_level" name="programming_level" required>
-                @foreach ($levels as $level)
-                    <option value="{{ $level->id }}">{{$level->name}}</option>
+                @foreach ($levels as $key => $level)
+                    <option value="{{$key}}">{{$level}}</option>
                 @endforeach
             </select>
         </div>
