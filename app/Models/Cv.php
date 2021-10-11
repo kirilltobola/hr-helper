@@ -15,10 +15,10 @@ class Cv extends Model
         'skills',
         'cv',
         'experience',
-        'position',
-        'programming_level',
+        'position_id',
+        'programming_level_id',
         'date',
-        'status'
+        'status_id'
     ];
 
     public function candidate()
@@ -26,34 +26,34 @@ class Cv extends Model
         return $this->hasOne(Candidate::class);
     }
 
-    public function getPositionAttribute()
+    public function position()
     {
-        return Position::findOrFail($this->attributes['position']);
+        return $this->belongsTo(Position::class);
     }
 
-    public function getProgrammingLevelAttribute()
+    public function level()
     {
-        return ProgrammingLevel::findOrFail($this->attributes['programming_level']);
+        return $this->belongsTo(ProgrammingLevel::class, 'programming_level_id');
     }
 
-    public function getStatusAttribute()
+    public function status()
     {
-        return Status::findOrFail($this->attributes['status']);
+        return $this->belongsTo(Status::class);
     }
 
     public function setPositionAttribute($value)
     {
-        $this->attributes['position'] = $value->id;
+        $this->attributes['position_id'] = $value->id;
     }
 
     public function setProgrammingLevelAttribute($value)
     {
-        $this->attributes['programming_level'] = $value->id;
+        $this->attributes['programming_level_id'] = $value->id;
     }
 
     public function setStatusAttribute($value)
     {
-        $this->attributes['status'] = $value->id;
+        $this->attributes['status_id'] = $value->id;
     }
 
     public function scopeFilter(Builder $builder, $filters = []) :Builder

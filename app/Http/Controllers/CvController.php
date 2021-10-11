@@ -19,11 +19,9 @@ class CvController extends Controller
 
     public function create()
     {
-        $positions = Position::all();
-        $levels = ProgrammingLevel::all();
         return view('cv.create',[
-            'levels' => $levels,
-            'positions' => $positions
+            'levels' => ProgrammingLevel::pluck('name', 'id'),
+            'positions' => Position::pluck('name', 'id')
         ]);
     }
 
@@ -31,8 +29,8 @@ class CvController extends Controller
     {
         $cv = new Cv();
         $cv->fill([
-            'position' =>  Position::find($request->position),
-            'programming_level' => ProgrammingLevel::find($request->programming_level),
+            'position_id' =>  $request->position,
+            'programming_level_id' => $request->programming_level,
             'date' => $request->date,
             'skills' => $request->skills,
             'cv' => $request->cv,
@@ -58,8 +56,8 @@ class CvController extends Controller
             'cv.edit',
             [
                 "cv" => $cv,
-                'positions' => Position::all(),
-                'levels' => ProgrammingLevel::all(),
+                'positions' => Position::pluck('name', 'id'),
+                'levels' => ProgrammingLevel::pluck('name', 'id'),
             ]
         );
     }
@@ -67,8 +65,8 @@ class CvController extends Controller
     public function update(CvRequest $request, Cv $cv)
     {
         $cv->fill([
-            'position' =>  Position::find($request->position),
-            'programming_level' => ProgrammingLevel::find($request->programming_level),
+            'position_id' =>  $request->position,
+            'programming_level_id' => $request->programming_level,
             'date' => $request->date,
             'skills' => $request->skills,
             'cv' => $request->cv,
