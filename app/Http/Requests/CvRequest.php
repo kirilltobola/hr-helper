@@ -11,7 +11,7 @@ class CvRequest extends FormRequest
     {
         return [
             'name' => 'required|max:256',
-            'email' => 'required|email:rfc,dns|max:256',
+            'email' => 'required|unique:candidates|email:rfc,dns|max:256',
             'position' => 'required',
             'programming_level' => 'required',
             'date' => 'required',
@@ -24,9 +24,10 @@ class CvRequest extends FormRequest
     public function messages()
     {
         return [
-            'name.required' => 'Обязательное поле.',
-            'name.max' => 'Должно быть меньше :max символов.',
-            'email.email' => 'Должно соответствовать text@text.text'
+            '*.required' => 'Обязательное поле',
+            '*.max' => 'Максимальное количество символов :max',
+            '*.unique' => 'данный :attribute уже существует',
+            '*.email' => 'Должен соответствовать text@text.text',
         ];
     }
 }
