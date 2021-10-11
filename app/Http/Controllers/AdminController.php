@@ -112,7 +112,7 @@ class AdminController extends Controller
     public function delete(string $modelAlias, int $id)
     {
         $model = $this->getModel($modelAlias);
-        $amount = Cv::where($modelAlias, '=', $id)->get()->count();
+        $amount = Cv::where($modelAlias.'_id', '=', $id)->get()->count();
 
         return view(
             'admin.delete',
@@ -139,7 +139,7 @@ class AdminController extends Controller
     private function change($modelAlias, $id, $newId)
     {
         $newModel = $this->getModel($modelAlias)::find($newId);
-        $cvs = Cv::where($modelAlias, '=', $id)->get();
+        $cvs = Cv::where($modelAlias.'_id', '=', $id)->get();
         foreach ($cvs as $cv) {
             $cv->$modelAlias = $newModel;
             $cv->save();
