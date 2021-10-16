@@ -10,7 +10,7 @@ class AdminController extends Controller
 {
     private function getModel(string $modelAlias)
     {
-        return config("registered_models.$modelAlias.model");
+        return config("admin.registered_models.$modelAlias");
     }
 
     private function getShowAttributes(string $modelAlias)
@@ -39,17 +39,17 @@ class AdminController extends Controller
 
     public function index()
     {
-        $models = config("registered_models");
+        $models = config('admin.registered_models');
         return view(
              'admin.dashboard',
-            ["models" => array_keys($models)]
+            ['models' => array_keys($models)]
         );
     }
 
     public function show(string $modelAlias)
     {
         $model = $this->getModel($modelAlias);
-        $attributes = $this->getShowAttributes($modelAlias);
+        $attributes = ['id', 'name'];
         return view(
             'admin.show',
             [
@@ -62,20 +62,20 @@ class AdminController extends Controller
 
     public function create(string $modelAlias)
     {
-        $attributes = $this->getStoreAttributes($modelAlias);
+        $attributes = ['name'];//$this->getStoreAttributes($modelAlias);
         return view(
             'admin.create',
             [
                 'modelAlias' => $modelAlias,
-                'attributes' => $attributes
+                'attributes' => $attributes,
             ]
         );
     }
 
     public function store(Request $request, string $modelAlias): RedirectResponse
     {
-        $rules = $this->getValidationRules($request->keys());
-        $request->validate($rules);
+        //$rules = $this->getValidationRules($request->keys());
+        //$request->validate($rules);
 
         $model = $this->getModel($modelAlias);
         $model::create($request->except('_token'));
@@ -86,7 +86,7 @@ class AdminController extends Controller
     {
         $model = $this->getModel($modelAlias);
         $instance = $model::find($id);
-        $attributes = $this->getEditAttributes($modelAlias);
+        $attributes = ['name'];//$this->getEditAttributes($modelAlias);
         return view(
             'admin.edit',
             [
@@ -100,8 +100,8 @@ class AdminController extends Controller
 
     public function update(Request $request, string $modelAlias, int $id): RedirectResponse
     {
-        $rules = $this->getValidationRules($request->keys());
-        $request->validate($rules);
+        //$rules = $this->getValidationRules($request->keys());
+        //$request->validate($rules);
 
         $model = $this->getModel($modelAlias);
         $instance = $model::find($id);

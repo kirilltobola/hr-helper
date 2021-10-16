@@ -1,7 +1,9 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
+use App\Http\Requests\AdminAuthRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -13,8 +15,8 @@ class AdminUsersController extends Controller
         return view(
             'admin.auth.index',
             [
-                'users' => User::all(),
-                'attributes' => ['id', 'name', 'email', 'is_admin'],
+                'users' => User::where('is_admin', false)->get(),
+                'attributes' => ['id', 'name', 'email'],
             ]
         );
     }
@@ -24,12 +26,12 @@ class AdminUsersController extends Controller
         return view(
             'admin.auth.create',
             [
-                'attributes' => ['name', 'email', 'is_admin']
+                'attributes' => ['name', 'email', 'password']
             ]
         );
     }
 
-    public function store(Request $request)
+    public function store(AdminAuthRequest $request)
     {
         User::create($request->except('_token'));
         return redirect()->route('admin.users.index');
@@ -44,13 +46,13 @@ class AdminUsersController extends Controller
     {
         return view('admin.auth.edit',
             [
-                'attributes' => ['name', 'email', 'is_admin'],
+                'attributes' => ['name', 'email'],
                 'user' => $user,
             ]
         );
     }
 
-    public function update(Request $request, User $user)
+    public function update(AdminAuthRequest $request, User $user)
     {
         $user->update($request->except('_token'));
         return redirect()->route('admin.users.index');
