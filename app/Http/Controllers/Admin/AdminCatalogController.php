@@ -1,45 +1,23 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\AdminCatalogRequest;
 use App\Models\Cv;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 
-class AdminController extends Controller
+class AdminCatalogController extends Controller
 {
     private function getModel(string $modelAlias)
     {
-        return config("admin.registered_models.$modelAlias");
-    }
-
-    private function getShowAttributes(string $modelAlias)
-    {
-        return config("registered_models.$modelAlias.attributes.show");
-    }
-
-    private function getStoreAttributes(string $modelAlias)
-    {
-        return config("registered_models.$modelAlias.attributes.store");
-    }
-
-    private function getEditAttributes(string $modelAlias)
-    {
-        return config("registered_models.$modelAlias.attributes.edit");
-    }
-
-    private function getValidationRules(array $keys): array
-    {
-        $rules = [];
-        foreach ($keys as $key) {
-            $rules[$key] = 'required';
-        }
-        return $rules;
+        return config("admin.catalog.$modelAlias");
     }
 
     public function index()
     {
-        $models = config('admin.registered_models');
+        $models = config('admin.catalog');
         return view(
              'admin.dashboard',
             ['models' => array_keys($models)]
@@ -49,12 +27,11 @@ class AdminController extends Controller
     public function show(string $modelAlias)
     {
         $model = $this->getModel($modelAlias);
-        $attributes = ['id', 'name'];
         return view(
-            'admin.show',
+            'admin.catalog.show',
             [
                 'modelAlias' => $modelAlias,
-                'attributes' => $attributes,
+                'attributes' => ['id', 'name'],
                 'models' => $model::all(),
             ]
         );
@@ -62,23 +39,20 @@ class AdminController extends Controller
 
     public function create(string $modelAlias)
     {
-        $attributes = ['name'];//$this->getStoreAttributes($modelAlias);
         return view(
-            'admin.create',
+            'admin.catalog.create',
             [
                 'modelAlias' => $modelAlias,
-                'attributes' => $attributes,
+                'attributes' => ['name'],
             ]
         );
     }
 
-    public function store(Request $request, string $modelAlias): RedirectResponse
+    public function store(AdminCatalogRequest $request, string $modelAlias): RedirectResponse
     {
-        //$rules = $this->getValidationRules($request->keys());
-        //$request->validate($rules);
-
         $model = $this->getModel($modelAlias);
         $model::create($request->except('_token'));
+
         return redirect()->route('admin.show', ['model' => $modelAlias]);
     }
 
@@ -86,41 +60,38 @@ class AdminController extends Controller
     {
         $model = $this->getModel($modelAlias);
         $instance = $model::find($id);
-        $attributes = ['name'];//$this->getEditAttributes($modelAlias);
         return view(
-            'admin.edit',
+            'admin.catalog.edit',
             [
                 'modelAlias' => $modelAlias,
                 'id' => $id,
-                'attributes' => $attributes,
+                'attributes' => ['name'],
                 'instance' => $instance
             ]
         );
     }
 
-    public function update(Request $request, string $modelAlias, int $id): RedirectResponse
+    public function update(AdminCatalogRequest $request, string $modelAlias, int $id): RedirectResponse
     {
-        //$rules = $this->getValidationRules($request->keys());
-        //$request->validate($rules);
-
         $model = $this->getModel($modelAlias);
         $instance = $model::find($id);
         $instance->update($request->except('_token'));
+
         return redirect()->route('admin.show', ['model' => $modelAlias]);
     }
 
     public function delete(string $modelAlias, int $id)
     {
         $model = $this->getModel($modelAlias);
-        $amount = Cv::where($modelAlias.'_id', '=', $id)->get()->count();
+        $canDelete = Cv::where($modelAlias.'_id', '=', $id)->get()->count();
 
         return view(
-            'admin.delete',
+            'admin.catalog.delete',
             [
                 'model' => $modelAlias,
                 'change' => $model::all()->except([$id]),
                 'id' => $id,
-                'amount' => $amount
+                'canDelete' => $canDelete
             ]
         );
     }
@@ -136,7 +107,7 @@ class AdminController extends Controller
         return redirect()->route('admin.show', ['model' => $modelAlias]);
     }
 
-    private function change($modelAlias, $id, $newId)
+    private function change(string $modelAlias, int $id, int $newId)
     {
         $newModel = $this->getModel($modelAlias)::find($newId);
         $cvs = Cv::where($modelAlias.'_id', '=', $id)->get();

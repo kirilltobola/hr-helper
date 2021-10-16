@@ -3,11 +3,11 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\AdminAuthRequest;
+use App\Http\Requests\Admin\AdminAuthRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
 
-class AdminUsersController extends Controller
+class AdminAuthController extends Controller
 {
 
     public function index()
@@ -39,7 +39,7 @@ class AdminUsersController extends Controller
 
     public function show(User $user)
     {
-        return '$user';
+        //
     }
 
     public function edit(User $user)

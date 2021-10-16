@@ -5,15 +5,14 @@
 @endsection
 
 @section('content')
-    @if($amount > 0)
+    @if($canDelete)
         <h2>Есть зависимости!</h2>
-        <p>Заменить на:</p>
         <form action="{{ route('admin.delete', ['model' => $model, 'id' => $id]) }}" method="post">
             @csrf
             @method('delete')
 
             <div class="input-group mb-3">
-                <span class="input-group-text" id="span-name">{{$model}}</span>
+                <span class="input-group-text" id="span-name">Заменить</span>
                 <select class="form-select form-select-sm" aria-label=".form-select-sm example" id="change-id" name="change">
                     @foreach ($change as $item)
                         <option value="{{ $item->id }}">{{$item->name}}</option>
