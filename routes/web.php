@@ -1,8 +1,8 @@
 <?php
 
 
-use App\Http\Controllers\Admin\AdminCatalogController;
-use App\Http\Controllers\Admin\AdminAuthController;
+use App\Http\Controllers\Admin\CatalogController;
+use App\Http\Controllers\Admin\AuthController;
 use App\Http\Controllers\CvController;
 use App\Http\Controllers\DashController;
 use Illuminate\Support\Facades\Route;
@@ -36,19 +36,19 @@ Route::middleware(['auth'])->group(function () {
         'prefix' => 'admin',
         'as' => 'admin.'
     ], function () {
-        Route::resource('users', AdminAuthController::class);
+        Route::resource('users', AuthController::class);
 
-        Route::get('/', [AdminCatalogController::class, 'index'])->name('index');
+        Route::get('/', [CatalogController::class, 'index'])->name('index');
         Route::prefix('/{model}')->group(function () {
-            Route::get('/', [AdminCatalogController::class, 'show'])->name('show');
-            Route::post('/', [AdminCatalogController::class, 'store'])->name('store');
-            Route::get('/create', [AdminCatalogController::class, 'create'])->name('create');
+            Route::get('/', [CatalogController::class, 'show'])->name('show');
+            Route::post('/', [CatalogController::class, 'store'])->name('store');
+            Route::get('/create', [CatalogController::class, 'create'])->name('create');
 
             Route::prefix('/{id}')->group(function () {
-                Route::get('/edit', [AdminCatalogController::class, 'edit'])->name('edit');
-                Route::put('/', [AdminCatalogController::class, 'update'])->name('update');
-                Route::get('/delete', [AdminCatalogController::class, 'delete'])->name('delete');
-                Route::delete('/delete', [AdminCatalogController::class, 'destroy'])->name('destroy');
+                Route::get('/edit', [CatalogController::class, 'edit'])->name('edit');
+                Route::put('/', [CatalogController::class, 'update'])->name('update');
+                Route::get('/delete', [CatalogController::class, 'delete'])->name('delete');
+                Route::delete('/delete', [CatalogController::class, 'destroy'])->name('destroy');
             });
         });
     });

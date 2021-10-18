@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Rules\Cv\MaxLengthWithoutTags;
 use Illuminate\Foundation\Http\FormRequest;
 
 class CvRequest extends FormRequest
@@ -11,13 +12,27 @@ class CvRequest extends FormRequest
     {
         return [
             'name' => 'required|max:256',
-            'email' => 'required|email:rfc,dns|max:256|unique:candidates,email,'.$this->route()->originalParameter('cv'),
+            'email' => [
+                'required',
+                'email:rfc,dns',
+                'max:256',
+                'unique:candidates,email,'.$this->route()->originalParameter('cv'),
+            ],
             'position' => 'required',
             'programming_level' => 'required',
             'date' => 'required',
-            'skills' => 'required',
-            'cv' => 'required',
-            'experience' => 'required',
+            'skills' => [
+                'required',
+                new MaxLengthWithoutTags(2000),
+            ],
+            'cv' => [
+                'required',
+                new MaxLengthWithoutTags(1000),
+            ],
+            'experience' => [
+                'required',
+                new MaxLengthWithoutTags(10000),
+            ],
         ];
     }
 
@@ -27,7 +42,7 @@ class CvRequest extends FormRequest
             '*.required' => 'Обязательное поле',
             '*.max' => 'Максимальное количество символов :max',
             '*.unique' => 'данный :attribute уже существует',
-            '*.email' => 'Должен соответствовать text@text.text',
+            '*.email' => 'Должен соответствовать example@example.com',
         ];
     }
 }
