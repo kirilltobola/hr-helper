@@ -34,9 +34,11 @@
                                 <li>
                                     <a href="{{ route('admin.edit', ['model' => $modelAlias, 'id' => $model->id]) }}" class="dropdown-item">Редактировать</a>
                                 </li>
-                                <li>
-                                    <a href="{{ route('admin.delete', ['model' => $modelAlias, 'id' => $model->id]) }}" class="dropdown-item">Удалить</a>
-                                </li>
+                                @if ($model->id != 1)
+                                    <li>
+                                        <a href="{{ route('admin.delete', ['model' => $modelAlias, 'id' => $model->id]) }}" class="dropdown-item">Удалить</a>
+                                    </li>
+                                @endif
                             </ul>
                         </div>
                     </td>
