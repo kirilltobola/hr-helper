@@ -33,30 +33,30 @@
         <div class="mb-4">
             <ul class="list-group">
                 <li class="list-group-item list-group-item-dark">Ключевы навыки:</li>
-                <li class="list-group-item list-group-item-light">{!! $cv->skills !!}</li>
+                <li class="list-group-item list-group-item-light text-body">{!! $cv->skills !!}</li>
             </ul>
         </div>
         <div class="mb-4">
             <ul class="list-group">
                 <li class="list-group-item list-group-item-dark">Резюме:</li>
-                <li class="list-group-item list-group-item-light">{!! $cv->cv !!}</li>
+                <li class="list-group-item list-group-item-light text-body">{!! $cv->cv !!}</li>
             </ul>
         </div>
         <div class="mb-4">
             <ul class="list-group">
                 <li class="list-group-item list-group-item-dark">Опыт:</li>
-                <li class="list-group-item list-group-item-light">{!! $cv->experience !!}</li>
+                <li class="list-group-item list-group-item-light text-body">{!! $cv->experience !!}</li>
             </ul>
 
         </div>
         <div class="d-flex flex-row">
-            <a class="btn btn-primary" href="{{route('cvs.save',['cv' => $cv->id])}}" role="button">Сохранить</a>
+            <form action="{{route('cvs.destroy',['cv' => $cv->id])}}" method="post">
+                @csrf
+                @method('delete')
+                <button type="submit" class="btn btn-danger">Удалить cv</button>
+            </form>
             <div class="ms-auto ">
-                <form action="{{route('cvs.destroy',['cv' => $cv->id])}}" method="post">
-                    @csrf
-                    @method('delete')
-                    <button type="submit" class="btn btn-dark">Удалить cv</button>
-                </form>
+                <a class="btn btn-dark" href="{{route('cvs.save',['cv' => $cv->id])}}" role="button">Сохранить</a>
             </div>
         </div>
     </div>

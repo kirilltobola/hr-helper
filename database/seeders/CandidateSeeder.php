@@ -16,18 +16,18 @@ class CandidateSeeder extends Seeder
     {
         DB::table('candidates')->insert([
             [
-                'name' => 'Pomazkin Maksim',
-                'email' => 'pomazkin.m@adict.ru',
+                'name' => 'Помазкин Максим',
+                'email' => 'pomazkin.m-dev@adict.ru',
                 'cv_id' => 1
             ],
             [
-                'name' => 'Tobola Kirill',
-                'email' => 'tobola.k@adict.ru',
+                'name' => 'Тобола Кирилл',
+                'email' => 'tobola.k-dev@adict.ru',
                 'cv_id' => 2
             ],
             [
-                'name' => 'Syharev Mihail',
-                'email' => 'syharec.m@adict.ru',
+                'name' => 'Сухарев Михаил',
+                'email' => 'syharec.m-dev@adict.ru',
                 'cv_id' => 3
             ],
         ]);

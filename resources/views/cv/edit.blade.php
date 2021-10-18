@@ -92,8 +92,9 @@
         @error('experience')
             <div class="alert alert-danger">{{ $message }}</div>
         @enderror
-
-        <button class="btn btn-dark" type="submit">Изменить</button>
+        <div class="d-flex mb-1">
+            <button class="btn btn-dark ms-auto" type="submit">Изменить</button>
+        </div>
     </form>
 
     <script src="{{asset('js/cv_generate_email.js')}}"></script>

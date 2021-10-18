@@ -16,6 +16,13 @@
             <h3 class="text-center">Фильтрация</h3>
             <form action="{{route('dashboard')}}" method="get">
                 <fieldset>
+                    <legend class="text-center">По имени</legend>
+                    <div class="mx-sm-2">
+                        <input type="text" class="form-control" id="searchByName" placeholder="Введите имя"
+                               name="nameSearch">
+                    </div>
+                </fieldset>
+                <fieldset>
                     <legend class="text-center">По позиции</legend>
                     <div class="d-flex form-check flex-column ms-2">
                         @foreach($positions as $key => $position)
@@ -178,14 +185,16 @@
                                     <button id="btnGroupDrop1" type="button"
                                             class="btn btn-sm btn-light dropdown-toggle" data-bs-toggle="dropdown"
                                             aria-expanded="false">
-                                        Actions
+                                        Действия
                                     </button>
                                     <ul class="dropdown-menu" aria-labelledby="btnGroupDrop1">
                                         <li>
-                                            <a href="{{route('cvs.show', ['cv' => $cv->id])}}" class="dropdown-item">View</a>
+                                            <a href="{{route('cvs.show', ['cv' => $cv->id])}}"
+                                               class="dropdown-item">Показать</a>
                                         </li>
                                         <li>
-                                            <a href="{{route('cvs.edit', ['cv' => $cv->id])}}" class="dropdown-item">Edit</a>
+                                            <a href="{{route('cvs.edit', ['cv' => $cv->id])}}"
+                                               class="dropdown-item">Изменить</a>
                                         </li>
                                     </ul>
                                 </div>
@@ -198,6 +207,6 @@
         </div>
     </div>
 </div>
-<script src="{{asset('js/hideFilterFrom.js')}}"></script>
-<script src="{{asset('js/toggleFilterForm.js')}}"></script>
+<script src="{{asset('js/hide_filter_from.js')}}"></script>
+<script src="{{asset('js/toggle_filter_form.js')}}"></script>
 @endsection

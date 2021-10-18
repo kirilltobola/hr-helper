@@ -72,9 +72,15 @@ class Cv extends Model
             $builder->where('date', '<=', $filters['dateTo']);
         }
 
+
         foreach($filters as $key => $filter) {
             $builder->when(in_array($key, $this->fillable), function ($q) use ($key, $filter) {
                 return $q->whereIn($key, $filter);
+            });
+            $builder->when($key == 'nameSearch', function ($b) use ($filters){
+                $b->whereHas('candidate', function ($b) use ($filters){
+                   $b->where('name', 'LIKE', '%'.$filters['nameSearch'].'%');
+                });
             });
         }
 

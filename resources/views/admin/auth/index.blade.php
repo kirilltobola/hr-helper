@@ -10,15 +10,15 @@
         <a class="btn btn-dark" href="{{ route('admin.users.create') }}" type="button">Добавить</a>
     </div>
 
-    <div class="table-responsive">
+    <div class="table-responsive vh-100">
         <table class="table">
             <thead>
-            <tr>
-                @foreach($attributes as $attribute)
-                    <th scope="col">{{ $attribute }}</th>
-                @endforeach
-                <th scope="col"></th>
-            </tr>
+                <tr>
+                    @foreach($attributes as $attribute)
+                        <th scope="col">{{ $attribute }}</th>
+                    @endforeach
+                    <th scope="col">Действия</th>
+                </tr>
             </thead>
             <tbody>
             @foreach($users as $user)
