@@ -27,7 +27,7 @@ class CandidateSeeder extends Seeder
             ],
             [
                 'name' => 'Сухарев Михаил',
-                'email' => 'syharec.m-dev@adict.ru',
+                'email' => 'syharev.m-dev@adict.ru',
                 'cv_id' => 3
             ],
         ]);
