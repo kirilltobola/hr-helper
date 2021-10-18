@@ -5,7 +5,7 @@
 </head>
 <body>
     @include('header')
-    <div class="container-sm">
+    <div class="container-sm vh-100">
         @yield('content')
     </div>
 </body>

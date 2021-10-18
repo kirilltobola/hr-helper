@@ -31,7 +31,7 @@
 
         <p>email: <a href="{{$cv->candidate->email}}">{{$cv->candidate->email}}</a></p>
         <p>позиция: {{$cv->position->name}}</p>
-        <p>уровень: {{$cv->programming_level->name}}</p>
+        <p>уровень: {{$cv->level->name}}</p>
         <p>дата: {{$cv->date}}</p>
         <p>статус: {{$cv->status->name}}</p>
 
