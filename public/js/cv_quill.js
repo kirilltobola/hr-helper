@@ -1,5 +1,5 @@
 
-const toolbarOptions = ['bold', 'italic', 'underline', 'strike', 'link', ];
+const toolbarOptions = ['bold', 'italic', 'underline', 'strike', 'link', 'clean'];
 
 let cv = new Quill('#cv', {
     theme: 'snow',
