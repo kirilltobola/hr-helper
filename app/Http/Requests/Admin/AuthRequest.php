@@ -3,6 +3,7 @@
 namespace App\Http\Requests\Admin;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rules\Password;
 
 class AdminAuthRequest extends FormRequest
 {
@@ -11,7 +12,7 @@ class AdminAuthRequest extends FormRequest
     {
         return [
             'name' => 'required|max:256',
-            'password' => 'min:8',
+            'password' => ['required', Password::min(8)],
             'email' => 'required|email:rfc,dns|max:256|unique:users',
         ];
     }

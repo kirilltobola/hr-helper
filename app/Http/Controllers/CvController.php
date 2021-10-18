@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Cv;
 
 use App\Http\Requests\CvRequest;
 use App\Models\Candidate;
