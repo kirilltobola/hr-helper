@@ -3,11 +3,10 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Admin\AdminAuthRequest;
+use App\Http\Requests\Admin\AuthRequest;
 use App\Models\User;
-use Illuminate\Http\Request;
 
-class AdminAuthController extends Controller
+class AuthController extends Controller
 {
 
     public function index()
@@ -31,7 +30,7 @@ class AdminAuthController extends Controller
         );
     }
 
-    public function store(AdminAuthRequest $request)
+    public function store(AuthRequest $request)
     {
         User::create($request->except('_token'));
         return redirect()->route('admin.users.index');
@@ -52,7 +51,7 @@ class AdminAuthController extends Controller
         );
     }
 
-    public function update(AdminAuthRequest $request, User $user)
+    public function update(AuthRequest $request, User $user)
     {
         $user->update($request->except('_token'));
         return redirect()->route('admin.users.index');

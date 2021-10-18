@@ -4,7 +4,7 @@ namespace App\Http\Requests\Admin;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class AdminCatalogRequest extends FormRequest
+class CatalogRequest extends FormRequest
 {
 
     public function rules()

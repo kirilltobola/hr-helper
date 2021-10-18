@@ -5,7 +5,7 @@ namespace App\Http\Requests\Admin;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rules\Password;
 
-class AdminAuthRequest extends FormRequest
+class AuthRequest extends FormRequest
 {
 
     public function rules()

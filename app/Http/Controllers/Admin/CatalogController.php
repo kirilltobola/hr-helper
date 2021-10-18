@@ -3,12 +3,12 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Admin\AdminCatalogRequest;
+use App\Http\Requests\Admin\CatalogRequest;
 use App\Models\Cv;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 
-class AdminCatalogController extends Controller
+class CatalogController extends Controller
 {
     private function getModel(string $modelAlias)
     {
@@ -48,7 +48,7 @@ class AdminCatalogController extends Controller
         );
     }
 
-    public function store(AdminCatalogRequest $request, string $modelAlias): RedirectResponse
+    public function store(CatalogRequest $request, string $modelAlias): RedirectResponse
     {
         $model = $this->getModel($modelAlias);
         $model::create($request->except('_token'));
@@ -71,7 +71,7 @@ class AdminCatalogController extends Controller
         );
     }
 
-    public function update(AdminCatalogRequest $request, string $modelAlias, int $id): RedirectResponse
+    public function update(CatalogRequest $request, string $modelAlias, int $id): RedirectResponse
     {
         $model = $this->getModel($modelAlias);
         $instance = $model::find($id);

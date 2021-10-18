@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Cv;
+namespace App\Http\Controllers;
 
 use App\Http\Requests\CvRequest;
 use App\Models\Candidate;
@@ -14,7 +14,7 @@ class CvController extends Controller
 
     public function index()
     {
-
+        //
     }
 
     public function create()
