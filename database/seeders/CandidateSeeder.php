@@ -17,17 +17,17 @@ class CandidateSeeder extends Seeder
         DB::table('candidates')->insert([
             [
                 'name' => 'Помазкин Максим',
-                'email' => 'pomazkin.m-dev@adict.ru',
+                'email' => 'zinddmax@gmail.com',
                 'cv_id' => 1
             ],
             [
                 'name' => 'Тобола Кирилл',
-                'email' => 'tobola.k-dev@adict.ru',
+                'email' => 'kirilltobola@gmail.com',
                 'cv_id' => 2
             ],
             [
                 'name' => 'Сухарев Михаил',
-                'email' => 'syharev.m-dev@adict.ru',
+                'email' => 'mishapsyxarev@gmail.com',
                 'cv_id' => 3
             ],
         ]);
