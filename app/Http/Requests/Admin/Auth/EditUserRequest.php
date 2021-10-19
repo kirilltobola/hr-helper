@@ -1,19 +1,23 @@
 <?php
 
-namespace App\Http\Requests\Admin;
+namespace App\Http\Requests\Admin\Auth;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\Rules\Password;
 
-class AuthRequest extends FormRequest
+
+class EditUserRequest extends FormRequest
 {
 
     public function rules()
     {
         return [
             'name' => 'required|max:256',
-            'password' => ['required', Password::min(8)],
-            'email' => 'required|email:rfc,dns|max:256|unique:users',
+            'email' => [
+                'required',
+                'email:rfc,dns',
+                'max:256',
+                'unique:users,email,'.$this->route()->originalParameter('user'),
+            ],
         ];
     }
 
